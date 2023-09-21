@@ -18,7 +18,7 @@ jobs:
       - name: Prepare
         id: prepare
         run: |
-          DOCKER_IMAGE=registry.cn-qingdao.aliyuncs.com/metersphere/alpine-openjdk17-jre
+          DOCKER_IMAGE=registry.cn-qingdao.aliyuncs.com/metersphere/alpine-openjdk21-jre
           DOCKER_PLATFORMS=linux/amd64,linux/arm64
           TAG_NAME=latest
           DOCKER_IMAGE_TAGS="--tag ${DOCKER_IMAGE}:${TAG_NAME}"
