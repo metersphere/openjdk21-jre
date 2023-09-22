@@ -2,6 +2,8 @@ FROM alpine:3.18.3
 
 USER root
 
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+
 RUN mkdir -p /deployments
 
 COPY run-java.sh /deployments/
