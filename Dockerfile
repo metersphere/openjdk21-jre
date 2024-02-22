@@ -15,7 +15,8 @@ ENV JAVA_APP_DIR=/deployments \
 
 RUN apk add --update --no-cache curl nss bash \
  && cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone && apk del tzdata \
- && echo "securerandom.source=file:/dev/urandom" >> /opt/java/openjdk/lib/security/java.security \
+ && sed -i 's/securerandom.source=file:\/dev\/random/securerandom.source=file:\/dev\/.\/urandom/' /opt/java/openjdk/conf/security/java.security \
+ && sed -i 's/SSLv3, TLSv1, TLSv1.1, //' /opt/java/openjdk/conf/security/java.security \
  && curl -L --connect-timeout 60 -m 1800 https://fit2cloud-support.oss-cn-beijing.aliyuncs.com/xpack-license/get-validator-linux | sh \
  && rm -rf /tmp/* /var/tmp/* /var/cache/apk/* \
  && chmod 755 /deployments/run-java.sh \
