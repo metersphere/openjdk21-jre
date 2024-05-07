@@ -18,7 +18,7 @@ jobs:
       - name: Prepare
         id: prepare
         run: |
-          DOCKER_IMAGE=registry.cn-qingdao.aliyuncs.com/metersphere/alpine-openjdk21-jre
+          DOCKER_IMAGE=registry.fit2cloud.com/metersphere/alpine-openjdk21-jre
           DOCKER_PLATFORMS=linux/amd64,linux/arm64
           TAG_NAME=latest
           DOCKER_IMAGE_TAGS="--tag ${DOCKER_IMAGE}:${TAG_NAME}"
@@ -38,9 +38,9 @@ jobs:
       - name: Login to Registry
         uses: docker/login-action@v2
         with:
-          registry: registry.cn-qingdao.aliyuncs.com
-          username: ${{ secrets.ALIYUN_REGISTRY_USERNAME }}
-          password: ${{ secrets.ALIYUN_REGISTRY_PASSWORD }}
+          registry: registry.fit2cloud.com
+          username: ${{ secrets.FIT2CLOUD_REGISTRY_USERNAME }}
+          password: ${{ secrets.FIT2CLOUD_REGISTRY_PASSWORD }}
       - name: Docker Buildx (push)
         run: |
           docker buildx build --output "type=image,push=true" ${{ steps.prepare.outputs.buildx_args }}
