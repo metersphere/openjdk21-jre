@@ -1,4 +1,4 @@
-name: build-and-push-to-aliyun
+name: build-and-push-to-fit2cloud
 
 on:
   push:
