@@ -1,2 +1,2 @@
-# alpine-openjdk21-jre
+# openjdk21-jre
 
