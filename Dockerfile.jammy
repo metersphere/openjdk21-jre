@@ -1,0 +1,25 @@
+FROM eclipse-temurin:21-jre-jammy
+
+USER root
+
+
+RUN mkdir -p /deployments
+
+COPY run-java.sh /deployments/
+
+ENV JAVA_APP_DIR=/deployments \
+    JAVA_OPTIONS="-Dfile.encoding=utf-8" \
+    LOG4J_FORMAT_MSG_NO_LOOKUPS=true \
+    JAVA_MAJOR_VERSION=21 \
+    JAVA_MAX_HEAP_RATIO=40
+
+RUN cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone \
+ && sed -i 's/securerandom.source=file:\/dev\/random/securerandom.source=file:\/dev\/.\/urandom/' /opt/java/openjdk/conf/security/java.security \
+ && sed -i 's/SSLv3, TLSv1, TLSv1.1, //' /opt/java/openjdk/conf/security/java.security \
+ && curl -L --connect-timeout 60 -m 1800 https://fit2cloud-support.oss-cn-beijing.aliyuncs.com/xpack-license/get-validator-linux | sh \
+ && rm -rf /tmp/* /var/tmp/* \
+ && chmod 755 /deployments/run-java.sh \
+ && useradd -m -s /bin/bash appuser && echo "appuser:appuser" | chpasswd && usermod -aG root appuser \
+ && echo "set disable-completion on" >> /etc/inputrc
+
+CMD [ "/deployments/run-java.sh" ]
