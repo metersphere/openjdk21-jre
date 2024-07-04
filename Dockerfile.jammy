@@ -20,6 +20,7 @@ RUN cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shangha
  && rm -rf /tmp/* /var/tmp/* \
  && chmod 755 /deployments/run-java.sh \
  && useradd -m -s /bin/bash appuser && echo "appuser:appuser" | chpasswd && usermod -aG root appuser \
+ && ln -s /opt/java/openjdk/bin/java /usr/bin/java \
  && echo "set disable-completion on" >> /etc/inputrc
 
 CMD [ "/deployments/run-java.sh" ]
