@@ -19,7 +19,7 @@ RUN cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shangha
  && curl -L --connect-timeout 60 -m 1800 https://fit2cloud-support.oss-cn-beijing.aliyuncs.com/xpack-license/get-validator-linux | sh \
  && rm -rf /tmp/* /var/tmp/* \
  && chmod 755 /deployments/run-java.sh \
- && useradd -m -s /bin/bash appuser && echo "appuser:appuser" | chpasswd && usermod -aG root appuser \
+ && useradd -m -s /bin/false appuser && echo "appuser:appuser" | chpasswd && usermod -aG root appuser \
  && ln -s /opt/java/openjdk/bin/java /usr/bin/java \
  && echo "set disable-completion on" >> /etc/inputrc
 
